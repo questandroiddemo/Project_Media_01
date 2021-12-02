@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.project_media_01.Model.MusicFiles;
 import com.example.project_media_01.Presenter.InterfaceClick;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 
@@ -31,7 +32,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     private Context mContext;
     private ArrayList<MusicFiles> mFiles;
     private InterfaceClick listener;
-
+    private Instant Glide;
 
 
     MusicAdapter(Context mContext, ArrayList<MusicFiles> mFiles, InterfaceClick send){

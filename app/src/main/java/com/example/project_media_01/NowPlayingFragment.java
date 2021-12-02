@@ -13,18 +13,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.project_media_01.ContractInterface.Contract;
+import com.example.project_media_01.Presenter.Presenter;
+
 import java.io.IOException;
 
-public class NowPlayingFragment extends Fragment {
+public class NowPlayingFragment extends Fragment implements Contract.View {
+    Presenter presenter;
    static TextView title1,album1,artist1;
    static ImageView imageView;
+   static ImageButton btn_play_pause,btn_previous,btn_next;
+   static SeekBar songSeekBar;
     View v;
     static MediaPlayer mediaPlayer;
 
@@ -40,6 +48,7 @@ public class NowPlayingFragment extends Fragment {
         album1=view.findViewById(R.id.album);
         artist1=view.findViewById(R.id.artist);
         imageView=view.findViewById(R.id.imageView);
+
     }
 
     @Override
@@ -56,9 +65,65 @@ public class NowPlayingFragment extends Fragment {
         album1=v.findViewById(R.id.album);
         artist1=v.findViewById(R.id.artist);
         imageView=v.findViewById(R.id.imageView);
+        btn_play_pause=v.findViewById(R.id.btn_play_pause);
+        btn_next=v.findViewById(R.id.btn_next);
+        btn_previous=v.findViewById(R.id.btn_previous);
+        songSeekBar=v.findViewById(R.id.songSeekBar);
+
+
+        //presenter = new Presenter(this);
+
+        //Button click events
+
+        //on play/pause button click
+        btn_play_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.PlayPauseButtonClick();
+
+
+            }
+        });
+        //on previous button click
+        btn_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.PreviousButtonClick();
+
+            }
+        });
+        //on next button click
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.NextButtonClick();
+
+            }
+        });
+        //on seekbar change
+        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress()); //move it to model or service
+            }
+        });
+
         return v;
+
+
     }
 
+    //only method call needed no need of definition for update text here
     public void updateEditText(String title,String album,String artist , String path) {
 
         title1.setText("TITLE: "+title);
@@ -92,4 +157,5 @@ public class NowPlayingFragment extends Fragment {
         }
         //System.out.println(album);
     }
+
 }
