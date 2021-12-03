@@ -9,7 +9,6 @@
 package com.example.project_media_01;
 
 import android.content.Context;
-import android.media.MediaMetadataRetriever;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.project_media_01.Model.MusicFiles;
 import com.example.project_media_01.Presenter.InterfaceClick;
 
@@ -58,13 +56,13 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
         holder.file_name.setText(mFiles.get(position).getTitle());
 
-        byte[] image = getAlbumArt(mFiles.get(position).getPath());
-        if(image != null){
-            Glide.with(mContext).asBitmap().load(image).into(holder.album_art);
-        }
-        else {
-            Glide.with(mContext).asBitmap().load(R.drawable.ic_launcher_foreground).into(holder.album_art);
-        }
+//        byte[] image = getAlbumArt(mFiles.get(position).getPath());
+//        if(image != null){
+//            Glide.with(mContext).asBitmap().load(image).into(holder.album_art);
+//        }
+//        else {
+//            Glide.with(mContext).asBitmap().load(R.drawable.ic_launcher_foreground).into(holder.album_art);
+//        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +89,12 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             album_art = itemView.findViewById(R.id.music_img);
         }
     }
-    private byte[] getAlbumArt(String uri){
-        MediaMetadataRetriever retriever= new MediaMetadataRetriever();
-        retriever.setDataSource(uri);
-        byte[] art = retriever.getEmbeddedPicture();
-        retriever.release();
-        return art;
-    }
+//    private byte[] getAlbumArt(String uri){
+//        MediaMetadataRetriever retriever= new MediaMetadataRetriever();
+//        retriever.setDataSource(uri);
+//        byte[] art = retriever.getEmbeddedPicture();
+//        retriever.release();
+//        return art;
+//    }
 
 }

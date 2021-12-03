@@ -8,8 +8,6 @@
  */
 
 package com.example.project_media_01;
-import static com.example.project_media_01.MainActivity.musicFiles;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_media_01.Model.MusicFiles;
 import com.example.project_media_01.Presenter.InterfaceClick;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +32,6 @@ public class SongsFragment extends Fragment {
     MusicAdapter musicAdapter;
     Button btn ;
     private InterfaceClick listener;
-
     public SongsFragment() {
         // Required empty public constructor
     }
@@ -43,7 +43,8 @@ public class SongsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        if(!(musicFiles.size() <1)){
+        ArrayList<MusicFiles> musicFiles = null;
+        if(!(musicFiles.size()<1)){
             musicAdapter = new MusicAdapter(getContext(),musicFiles,listener);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
             recyclerView.setAdapter(musicAdapter);
