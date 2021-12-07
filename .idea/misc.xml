@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_baseline_skip_previous_24.xml" value="0.1" />
         <entry key="app/src/main/res/layout-land/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_now_playing.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_now_playing.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_song_list.xml" value="0.20625" />
         <entry key="app/src/main/res/layout/fragment_songs.xml" value="0.22" />
         <entry key="app/src/main/res/layout/music_items.xml" value="0.1" />

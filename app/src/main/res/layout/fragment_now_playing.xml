@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/musicplayerbg"
 
     tools:context=".NowPlayingFragment"
     tools:ignore="LabelFor">
@@ -21,7 +20,7 @@
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:padding="40dp"
-            android:src="@drawable/coverart" />
+            app:srcCompat="@drawable/cover" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,14 +73,14 @@
             android:id="@+id/btn_previous"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/ic_baseline_skip_previous_24"
+            android:background="@android:drawable/ic_media_previous"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/btn_play_pause"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/ic_baseline_play_arrow_24"
+            android:background="@android:drawable/ic_media_pause"
             tools:ignore="SpeakableTextPresentCheck" />
         <!--        <ImageButton-->
         <!--            android:id="@+id/pause_btn"-->
@@ -94,7 +93,7 @@
             android:id="@+id/btn_next"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/ic_baseline_skip_next_24"
+            android:background="@android:drawable/ic_media_next"
             tools:ignore="SpeakableTextPresentCheck" />
 
 

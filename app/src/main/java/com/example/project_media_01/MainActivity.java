@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,6 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import AidlPackage.AidlInterface;
 
 public class MainActivity extends AppCompatActivity {
     Presenter presenter;
@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPagerAdapter viewPagerAdapter;
     static ArrayList<MusicFiles> musicFiles;
-    private AidlInterface aidlObject;
+    private AidlInterface iMyAidlInterface;
+    Boolean connected=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +47,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         songFrag = new SongsFragment();
         nowPlayFrag = new NowPlayingFragment();
-        permission();
-        bindToAIDLService();
+      //  permission();
+//        bindToAIDLService();
+        Intent intent = new Intent("com.example.project_media_service_01.AIDL");
 
+        intent.setClassName("com.example.project_media_service_01",
+                "com.example.project_media_service_01.MyService");
+        if(getBaseContext().getApplicationContext().bindService(intent, serviceCon, Context.BIND_AUTO_CREATE)){
+            connected=true;
+            Toast.makeText(getApplicationContext(), "BindServiceSuccess", Toast.LENGTH_SHORT).show();
+            System.out.println("Binding success");
+        }else
+            System.out.println("Failed");
+        Toast.makeText(getApplicationContext(), "BindServiceFailed", Toast.LENGTH_SHORT).show();
 
     }
+    private final ServiceConnection serviceCon=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            iMyAidlInterface = AidlInterface.Stub.asInterface(iBinder);
+            initViewPager();
+        }
 
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
 
+        }
+    };
 
     private void permission() {
         if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -68,40 +89,6 @@ public class MainActivity extends AppCompatActivity {
             initViewPager();
         }
     }
-
-    private void bindToAIDLService() {
-        Intent aidlServiceIntent = new Intent("connect_to_aidl_service");
-
-        bindService(implicitIntentToExplicitIntent(aidlServiceIntent,this),serviceConnectionObject,BIND_AUTO_CREATE);
-    }
-    ServiceConnection serviceConnectionObject =new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder iBinder) {
-            aidlObject = AidlInterface.Stub.asInterface(iBinder);
-
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
-
-
-    //converting implicit intent ot explicit intent
-    public Intent implicitIntentToExplicitIntent(Intent implicitIntent, Context context){
-        PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> resolveInfoList = packageManager.queryIntentServices(implicitIntent,0);
-        if(resolveInfoList == null || resolveInfoList.size()!=1){
-            return null;
-        }
-        ResolveInfo serviceInfo = resolveInfoList.get(0);
-        ComponentName component = new ComponentName(serviceInfo.serviceInfo.packageName,serviceInfo.serviceInfo.name);
-        Intent explicitIntent = new Intent(implicitIntent);
-        explicitIntent.setComponent(component);
-        return explicitIntent;
-    }
-
 
 
     @Override

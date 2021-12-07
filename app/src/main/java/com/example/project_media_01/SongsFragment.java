@@ -43,28 +43,29 @@ public class SongsFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-        ArrayList<MusicFiles> musicFiles = null;
-        if(!(musicFiles.size()<1)){
-            musicAdapter = new MusicAdapter(getContext(),musicFiles,listener);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
-            recyclerView.setAdapter(musicAdapter);
-        }
-        return view;
+//        ArrayList<MusicFiles> musicFiles = null;
+//        if(!(musicFiles.size()<1)){
+//            musicAdapter = new MusicAdapter(getContext(),musicFiles,listener);
+//            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
+//            recyclerView.setAdapter(musicAdapter);
+//        }
+//        return view;
+        return null;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof InterfaceClick) {
-            listener = (InterfaceClick) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement FragmentAListener");
-        }
-    }
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof InterfaceClick) {
+//            listener = (InterfaceClick) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement FragmentAListener");
+//        }
+//    }
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        listener = null;
+//    }
 }
