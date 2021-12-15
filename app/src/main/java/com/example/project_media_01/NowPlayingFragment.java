@@ -69,7 +69,9 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
         songSeekBar=v.findViewById(R.id.songSeekBar);
 
 
-        //presenter = new Presenter(this);
+
+        presenter = new Presenter();
+        presenter.getAllAudio();
 
         //Button click events
 
@@ -78,43 +80,44 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
             @Override
             public void onClick(View view) {
                 presenter.PlayPauseButtonClick();
+                System.out.println("play onclick called");
 
 
             }
         });
-        //on previous button click
-        btn_previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.PreviousButtonClick();
-
-            }
-        });
-        //on next button click
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.NextButtonClick();
-
-            }
-        });
-        //on seekbar change
-        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress()); //move it to model or service
-            }
-        });
+//        //on previous button click
+//        btn_previous.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                presenter.PreviousButtonClick();
+//
+//            }
+//        });
+//        //on next button click
+//        btn_next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                presenter.NextButtonClick();
+//
+//            }
+//        });
+//        //on seekbar change
+//        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                mediaPlayer.seekTo(seekBar.getProgress()); //move it to model or service
+//            }
+//        });
 
         return v;
 

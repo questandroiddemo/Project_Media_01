@@ -56,6 +56,8 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
         holder.file_name.setText(mFiles.get(position).getTitle());
 
+//to diaplay album cover
+
 //        byte[] image = getAlbumArt(mFiles.get(position).getPath());
 //        if(image != null){
 //            Glide.with(mContext).asBitmap().load(image).into(holder.album_art);
