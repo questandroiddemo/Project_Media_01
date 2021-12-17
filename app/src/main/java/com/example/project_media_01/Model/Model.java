@@ -5,6 +5,9 @@ import android.os.RemoteException;
 import com.example.project_media_01.ContractInterface.Contract;
 import com.example.project_media_01.MainFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Model implements Contract.Model{
     MainFragment mainFragment;
     Contract.View view;
@@ -19,44 +22,6 @@ public class Model implements Contract.Model{
 
     }
 
-
-//    MusicFiles musicFiles;
-//    ListView listSongs;
-//    String[] items;
-
-
-
-//    @Override
-//    public void getSongsFromService() {
-//        try {
-//            aidlObject.getAllAudio();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//        return;
-//    }
-//
-//    @Override
-//    public void playPreviousSong() {
-//        try {
-//            aidlObject.playPreviousSong();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//    @Override
-//    public void playNextSong() {
-//        try {
-//            aidlObject.playNextSong();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
     @Override
     public void playPause() {
         //MainActivity.getInstance().playPauseSong();
@@ -66,19 +31,18 @@ public class Model implements Contract.Model{
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-//        try {
-//           aidlObject.playPauseSong();
-//           System.out.println("aidlObject.playPauseSong() method in model class called");
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
+
 
     }
-    public void getAllAudio() {
+    @Override
+    public List<String> getAllAudio() {
+        ArrayList<String> songTitle = new ArrayList<>();
         try {
-            MainFragment.getAidl().getAllAudio();
+            songTitle= (ArrayList<String>) MainFragment.getAidl().getAllAudio();
+            System.out.println(MainFragment.getAidl().getAllAudio());
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+        return songTitle;
     }
 }

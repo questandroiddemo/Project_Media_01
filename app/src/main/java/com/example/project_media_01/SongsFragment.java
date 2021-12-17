@@ -8,7 +8,7 @@
  */
 
 package com.example.project_media_01;
-import android.content.Context;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +19,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project_media_01.Model.MusicFiles;
-import com.example.project_media_01.Presenter.InterfaceClick;
+import com.example.project_media_01.ContractInterface.Contract;
+import com.example.project_media_01.Presenter.Presenter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SongsFragment extends Fragment {
+public class SongsFragment extends Fragment implements Contract.View{
+    Presenter presenter;
     RecyclerView recyclerView;
     MusicAdapter musicAdapter;
     Button btn ;
-    private InterfaceClick listener;
+    private  InterfaceClick listener;
     public SongsFragment() {
         // Required empty public constructor
     }
@@ -42,6 +43,11 @@ public class SongsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_songs, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+       // presenter = new Presenter();
+
+        presenter = new Presenter(this);
+        presenter.getAllAudio();
+        System.out.println("listerner---------------------------"+listener);
 
 //        ArrayList<MusicFiles> musicFiles = null;
 //        if(!(musicFiles.size()<1)){
@@ -50,22 +56,17 @@ public class SongsFragment extends Fragment {
 //            recyclerView.setAdapter(musicAdapter);
 //        }
 //        return view;
-        return null;
+        return view;
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof InterfaceClick) {
-//            listener = (InterfaceClick) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement FragmentAListener");
-//        }
-//    }
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        listener = null;
-//    }
+    @Override
+    public void setSongList(List<String> allAudio) {
+        System.out.println("inside setSingLit"+allAudio);
+        //musicAdapter = new MusicAdapter(getContext(),allAudio,listener);
+        musicAdapter = new MusicAdapter(getContext(),allAudio,listener);
+        System.out.println("Listerner------------------"+listener);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
+        recyclerView.setAdapter(musicAdapter);
+
+    }
 }

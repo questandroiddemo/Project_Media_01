@@ -18,28 +18,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project_media_01.Model.MusicFiles;
-import com.example.project_media_01.Presenter.InterfaceClick;
+import com.example.project_media_01.Presenter.Presenter;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.List;
 
 
-public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> {
-
+public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder>  {
+    Presenter presenter;
     private Context mContext;
-    private ArrayList<MusicFiles> mFiles;
+    //private ArrayList<MusicFiles> mFiles;
+    private List<String> allAudio;
+
     private InterfaceClick listener;
     private Instant Glide;
 
 
-    MusicAdapter(Context mContext, ArrayList<MusicFiles> mFiles, InterfaceClick send){
+//    MusicAdapter(Context mContext, List<String> mFiles, InterfaceClick send){
+//        this.mContext = mContext;
+//        this.mFiles = mFiles;
+//        this.listener= send;
+//
+//    }
+
+    MusicAdapter(Context mContext, List<String> allAudio,InterfaceClick send){
+        //this.presenter = presenter;
         this.mContext = mContext;
-        this.mFiles = mFiles;
+        this.allAudio=allAudio;
         this.listener= send;
-
+        System.out.println("-------------------"+listener);
     }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,10 +59,11 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        MusicFiles model = mFiles.get(position);
-        holder.file_name.setText(model.getTitle());
+       // MusicFiles model = mFiles.get(position);
 
-        holder.file_name.setText(mFiles.get(position).getTitle());
+        //holder.file_name.setText(model.getTitle());
+        //holder.file_name.setText(mFiles.get(position).getTitle());
+        holder.file_name.setText(allAudio.get(position));
 
 //to diaplay album cover
 
@@ -69,9 +78,16 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("list onclick worked "+allAudio.get(position));
+                System.out.println("position--------------- "+position);
+                System.out.println("listerner  "+ listener);
 
                 //  Toast.makeText(mContext, model.getTitle(), Toast.LENGTH_SHORT).show();
-                listener.clickFunction(model.getTitle(), model.getAlbum(), model.getArtist(), model.getPath());
+                //listener.clickFunction(model.getTitle(), model.getAlbum(), model.getArtist(), model.getPath());
+                listener.clickFunction(position);
+                //presenter.PlayPauseButtonClick();
+                //System.out.println("presenter---------------"+ presenter);
+                //presenter.playSong();
             }
         });
 
@@ -79,7 +95,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return mFiles.size();
+        return allAudio.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -91,12 +107,5 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             album_art = itemView.findViewById(R.id.music_img);
         }
     }
-//    private byte[] getAlbumArt(String uri){
-//        MediaMetadataRetriever retriever= new MediaMetadataRetriever();
-//        retriever.setDataSource(uri);
-//        byte[] art = retriever.getEmbeddedPicture();
-//        retriever.release();
-//        return art;
-//    }
 
 }

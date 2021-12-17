@@ -25,6 +25,8 @@ import androidx.fragment.app.Fragment;
 import com.example.project_media_01.ContractInterface.Contract;
 import com.example.project_media_01.Presenter.Presenter;
 
+import java.util.List;
+
 public class NowPlayingFragment extends Fragment implements Contract.View {
     Presenter presenter;
    static TextView title1,album1,artist1;
@@ -67,11 +69,8 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
         btn_next=v.findViewById(R.id.btn_next);
         btn_previous=v.findViewById(R.id.btn_previous);
         songSeekBar=v.findViewById(R.id.songSeekBar);
-
-
-
-        presenter = new Presenter();
-        presenter.getAllAudio();
+//        presenter = new Presenter();
+//        presenter.getAllAudio();
 
         //Button click events
 
@@ -124,39 +123,10 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
 
     }
 
-    //only method call needed no need of definition for update text here
-//    public void updateEditText(String title,String album,String artist , String path) {
-//
-//        title1.setText("TITLE: "+title);
-//        album1.setText("ALBUM: "+album);
-//        artist1.setText("ARTIST: "+artist);
-//        mediaPlayer=new MediaPlayer();
-//        try {
-//            mediaPlayer.setDataSource(path);
-//        } catch (IllegalArgumentException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IllegalStateException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        try {
-//            mediaPlayer.prepare();
-//        } catch (IllegalStateException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        mediaPlayer.start();
-//        if(mediaPlayer.isPlaying()) {
-//            System.out.println("playing");
-//        }
-//        //System.out.println(album);
-//    }
+    @Override
+    public void setSongList(List<String> allAudio) {
+
+    }
+
 
 }
