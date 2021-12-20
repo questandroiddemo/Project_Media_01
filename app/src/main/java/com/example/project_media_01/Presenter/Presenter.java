@@ -2,6 +2,7 @@ package com.example.project_media_01.Presenter;
 
 import com.example.project_media_01.ContractInterface.Contract;
 import com.example.project_media_01.Model.Model;
+import com.example.project_media_01.NowPlayingFragment;
 import com.example.project_media_01.SongsFragment;
 
 import java.util.ArrayList;
@@ -18,15 +19,13 @@ public class Presenter implements Contract.Presenter {
         this.view = view;
         model=new Model(presenter);
     }
-
     public Presenter() {
 
     }
 
 
     @Override
-    public void getAllAudio() {
-
+    public void getAllAudio(){
         System.out.println("getAllAudio in presenter call out "+model.getAllAudio());
         List<String> songname = new ArrayList<>();
         songname = model.getAllAudio();
@@ -35,10 +34,11 @@ public class Presenter implements Contract.Presenter {
     }
 
     @Override
-    public void PlayPauseButtonClick() {
+    public boolean PlayPauseButtonClick() {
         System.out.println("PlayPauseButtonClick ()  called");
-        model.playPause();
-
+        boolean playPauseStatus=model.playPauseSong();
+        System.out.println("Song play status in presenter "+playPauseStatus);
+        return playPauseStatus;
     }
 
     @Override
@@ -50,6 +50,7 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void getSongDetails(int position) {
+        nowPlayingView= new NowPlayingFragment();
       System.out.println("getSongDetails()  called in presenter-----------------");
         List<String> songDetails = new ArrayList<>();
         songDetails=model.getSongDetails(position);
@@ -57,4 +58,15 @@ public class Presenter implements Contract.Presenter {
         nowPlayingView.setSongDetails(songDetails);
     }
 
+    @Override
+    public void NextClick() {
+        System.out.println("playNextClick()  called in presenter-----------------");
+        //model.playSong(position);
+    }
+
+    @Override
+    public void PreviousClick() {
+        System.out.println("playPrevious()  called in presenter-----------------");
+        //model.playSong(position);
+    }
 }

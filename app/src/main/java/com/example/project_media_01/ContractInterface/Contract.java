@@ -14,8 +14,10 @@ public interface Contract {
 
     interface Presenter{
         void getAllAudio();
-        void PlayPauseButtonClick();
+        boolean PlayPauseButtonClick();
         void playSong(int position);
+        void NextClick();
+        void PreviousClick();
         void getSongDetails(int position);
         //void setSongDetails(List<String> songDetails);
 //        ArrayList<MusicFiles> getSongsFromService();
@@ -26,13 +28,10 @@ public interface Contract {
     }
 
     interface Model{
-        void playPause();
         List<String> getAllAudio();
-         void playSong(int position);
+        void playSong(int position);
+        boolean playPauseSong();
         List<String> getSongDetails(int position);
-//        void getSongsFromService();
-//        void playPreviousSong();
-//        void playNextSong();
-//        void playPause();
+
     }
 }

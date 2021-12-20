@@ -4,15 +4,13 @@ package AidlPackage;
 // Declare any non-default types here with import statements
 
 interface AidlInterface {
-    int playNextSong();
-    int playPreviousSong();
-    void playPauseSong();
+    boolean playPauseSong();
+    void playSong(int position);
     //ArrayList<MusicFiles> getAllAudio();
     List<String> getAllAudio();
     String getAlbum(int position);
     String getArtist(int position);
-    void playSong(int position);
-    List<String> getSongDetails(int position);
 
+    List<String> getSongDetails(int position);
 
 }

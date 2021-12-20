@@ -76,7 +76,6 @@ public class MainFragment extends Fragment  {
         }
     };
 
-
     public static void playSong(int position) {
         try {
             MainFragment.getAidl().playSong(position);
@@ -84,16 +83,17 @@ public class MainFragment extends Fragment  {
             e.printStackTrace();
         }
     }
+    public static boolean playPauseSong() {
+        boolean playStatus = false;
+        try {
+            playStatus=MainFragment.getAidl().playPauseSong();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return playStatus;
+    }
     public static AidlInterface getAidl(){
         return aidlInterface;
     }
 
-//    public List<String> getSongDetails(int position) {
-//        try {
-//            MainFragment.getAidl().getSongDetails(position);
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="song name: "
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/album"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="album :"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/artist"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="artist:"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
 
         </LinearLayout>
@@ -84,7 +84,7 @@
             android:id="@+id/btn_play_pause"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@android:drawable/ic_media_pause"
+            android:background="@android:drawable/ic_media_play"
             tools:ignore="SpeakableTextPresentCheck" />
         <!--        <ImageButton-->
         <!--            android:id="@+id/pause_btn"-->

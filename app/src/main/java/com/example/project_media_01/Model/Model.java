@@ -21,19 +21,6 @@ public class Model implements Contract.Model{
     public Model() {
 
     }
-
-    @Override
-    public void playPause() {
-        System.out.println("playpause method in model class called");
-//        try {
-//            MainFragment.getAidl().playPauseSong();
-//            System.out.println("MainFragment.getAidl().playPauseSong(); method in model class called");
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-
-
-    }
     @Override
     public List<String> getAllAudio() {
         ArrayList<String> songTitle = new ArrayList<>();
@@ -49,7 +36,6 @@ public class Model implements Contract.Model{
     @Override
     public void playSong(int position) {
         MainFragment.playSong(position);
-
     }
 
     @Override
@@ -64,4 +50,14 @@ public class Model implements Contract.Model{
         }
         return songDetails;
     }
+
+    @Override
+    public boolean playPauseSong() {
+        boolean playPauseStatus;
+        playPauseStatus=MainFragment.playPauseSong();
+        System.out.println("playPause in model called");
+        return playPauseStatus;
+    }
+
+
 }
