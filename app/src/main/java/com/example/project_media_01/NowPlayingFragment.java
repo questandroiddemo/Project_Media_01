@@ -33,7 +33,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
    static ImageButton btn_play_pause,btn_previous,btn_next;
    static SeekBar songSeekBar;
     View v;
-    boolean playstatus;
+    boolean playStatus;
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -57,8 +57,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         btn_previous=v.findViewById(R.id.btn_previous);
         songSeekBar=v.findViewById(R.id.songSeekBar);
         presenter = new Presenter();
-//        presenter.getAllAudio();
-        //presenter = new Presenter(this);
+
         //Button click events
 
         //on play/pause button click
@@ -66,13 +65,13 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
             @Override
             public void onClick(View view) {
 
-                playstatus= presenter.PlayPauseButtonClick();
+                playStatus= presenter.PlayPauseButtonClick();
                 System.out.println("playpause onclick called");
-                if(playstatus==true) {
-                    btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_pause_24);
+                if(playStatus==true) {
+                    btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow_24);
                 }
                 else {
-                    btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_play_arrow_24);
+                    btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_pause_24);
                 }
 
             }
@@ -82,6 +81,12 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
             public void onClick(View v) {
                 presenter.NextClick();
 
+            }
+        });
+        btn_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.PreviousClick();
             }
         });
         return v;
@@ -94,7 +99,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         album1.setText("album:"+songDetails.get(1));
         artist1.setText("Artist:"+songDetails.get(2));
         btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_pause_24);
-        playstatus = true;
+        playStatus = true;
     }
 
 }

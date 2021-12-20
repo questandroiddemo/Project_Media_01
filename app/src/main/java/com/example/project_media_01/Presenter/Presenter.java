@@ -14,6 +14,8 @@ public class Presenter implements Contract.Presenter {
     Contract.View view;
     Contract.NowPlayingView nowPlayingView;
     Presenter presenter;
+    int index=0;
+    int songListSize;
 
     public Presenter(Contract.View view) {
         this.view = view;
@@ -45,28 +47,53 @@ public class Presenter implements Contract.Presenter {
     public void playSong(int position) {
         System.out.println("playSong()  called in presenter-----------------");
         model.playSong(position);
-        //view.
     }
 
     @Override
     public void getSongDetails(int position) {
+        index =position;
         nowPlayingView= new NowPlayingFragment();
       System.out.println("getSongDetails()  called in presenter-----------------");
-        List<String> songDetails = new ArrayList<>();
+        List<String> songDetails;
         songDetails=model.getSongDetails(position);
         System.out.println("inside get song details now playing object value "+nowPlayingView);
         nowPlayingView.setSongDetails(songDetails);
+        songListSize = Integer.parseInt(songDetails.get(3));
+        System.out.println("song list size  "+songListSize);
     }
 
     @Override
     public void NextClick() {
+        nowPlayingView= new NowPlayingFragment();
         System.out.println("playNextClick()  called in presenter-----------------");
-        //model.playSong(position);
+        index++;
+//        if(index>=songListSize)
+//        {
+//            System.out.println("end of the list");
+//            index=1;
+//        }
+            model.playSong(index);
+            List<String> songDetails;
+            songDetails = model.getSongDetails(index);
+            System.out.println("inside get song details now playing object value " + nowPlayingView);
+            nowPlayingView.setSongDetails(songDetails);
+
+
     }
 
     @Override
     public void PreviousClick() {
         System.out.println("playPrevious()  called in presenter-----------------");
-        //model.playSong(position);
+        index--;
+//        if(index<=0) {
+//            System.out.println("reached at first song");
+//            index=songListSize;
+//        }
+            model.playSong(index);
+            List<String> songDetails;
+            songDetails = model.getSongDetails(index);
+            System.out.println("inside get song details now playing object value " + nowPlayingView);
+            nowPlayingView.setSongDetails(songDetails);
+
     }
 }
