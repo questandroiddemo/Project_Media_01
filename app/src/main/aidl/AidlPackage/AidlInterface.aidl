@@ -12,6 +12,7 @@ interface AidlInterface {
     String getAlbum(int position);
     String getArtist(int position);
     void playSong(int position);
+    List<String> getSongDetails(int position);
 
 
 }

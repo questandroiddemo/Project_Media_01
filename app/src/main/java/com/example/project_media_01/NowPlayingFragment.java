@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -27,8 +26,9 @@ import com.example.project_media_01.Presenter.Presenter;
 
 import java.util.List;
 
-public class NowPlayingFragment extends Fragment implements Contract.View {
+public class NowPlayingFragment extends Fragment implements Contract.NowPlayingView {
     Presenter presenter;
+
    static TextView title1,album1,artist1;
    static ImageView imageView;
    static ImageButton btn_play_pause,btn_previous,btn_next;
@@ -39,17 +39,18 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
 
     public NowPlayingFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        title1=view.findViewById(R.id.text);
-        album1=view.findViewById(R.id.album);
-        artist1=view.findViewById(R.id.artist);
-        imageView=view.findViewById(R.id.imageView);
 
     }
+
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        title1=view.findViewById(R.id.text);
+//        album1=view.findViewById(R.id.album);
+//        artist1=view.findViewById(R.id.artist);
+//        imageView=view.findViewById(R.id.imageView);
+//
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,9 +70,9 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
         btn_next=v.findViewById(R.id.btn_next);
         btn_previous=v.findViewById(R.id.btn_previous);
         songSeekBar=v.findViewById(R.id.songSeekBar);
-//        presenter = new Presenter();
+        presenter = new Presenter();
 //        presenter.getAllAudio();
-
+        //presenter = new Presenter(this);
         //Button click events
 
         //on play/pause button click
@@ -80,53 +81,13 @@ public class NowPlayingFragment extends Fragment implements Contract.View {
             public void onClick(View view) {
                 presenter.PlayPauseButtonClick();
                 System.out.println("play onclick called");
-
-
             }
         });
-//        //on previous button click
-//        btn_previous.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                presenter.PreviousButtonClick();
-//
-//            }
-//        });
-//        //on next button click
-//        btn_next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                presenter.NextButtonClick();
-//
-//            }
-//        });
-//        //on seekbar change
-//        songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-//
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//                mediaPlayer.seekTo(seekBar.getProgress()); //move it to model or service
-//            }
-//        });
-
         return v;
-
-
     }
-
     @Override
-    public void setSongList(List<String> allAudio) {
-
+    public void setSongDetails(List<String> songDetails) {
+        System.out.println("call reached to setSongDetails in nowplaying");
+        title1.setText(songDetails.get(0));
     }
-
-
 }

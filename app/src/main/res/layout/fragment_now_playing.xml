@@ -23,32 +23,36 @@
             app:srcCompat="@drawable/cover" />
 
         <LinearLayout
+            android:id="@+id/title1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="30dp">
+
             <TextView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="song name: "
-                android:textColor="#FFFFFF"
-                android:padding="10dp"/>
+                android:textColor="#FFFFFF" />
+
             <TextView
                 android:id="@+id/album"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="album :"
-                android:textColor="#FFFFFF"
-                android:padding="10dp"/>
+                android:textColor="#FFFFFF" />
+
             <TextView
                 android:id="@+id/artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="artist:"
-                android:textColor="#FFFFFF"
-                android:padding="10dp"/>
+                android:textColor="#FFFFFF" />
 
 
         </LinearLayout>

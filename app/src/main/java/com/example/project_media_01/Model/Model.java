@@ -24,13 +24,13 @@ public class Model implements Contract.Model{
 
     @Override
     public void playPause() {
-        //MainActivity.getInstance().playPauseSong();
-        try {
-            MainFragment.getAidl().playPauseSong();
-            System.out.println("MainFragment.getAidl().playPauseSong(); method in model class called");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+        System.out.println("playpause method in model class called");
+//        try {
+//            MainFragment.getAidl().playPauseSong();
+//            System.out.println("MainFragment.getAidl().playPauseSong(); method in model class called");
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
@@ -44,5 +44,24 @@ public class Model implements Contract.Model{
             e.printStackTrace();
         }
         return songTitle;
+    }
+
+    @Override
+    public void playSong(int position) {
+        MainFragment.playSong(position);
+
+    }
+
+    @Override
+    public List<String> getSongDetails(int position) {
+        System.out.println("getSongDetails()  called in model -----------------");
+        ArrayList<String> songDetails = new ArrayList<>();
+        try {
+            System.out.println("song details received at model"+MainFragment.getAidl().getSongDetails(position));
+            songDetails= (ArrayList<String>) MainFragment.getAidl().getSongDetails(position);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return songDetails;
     }
 }

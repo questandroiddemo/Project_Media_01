@@ -33,6 +33,8 @@ public class SongsFragment extends Fragment implements Contract.View{
     MusicAdapter musicAdapter;
     Button btn ;
     private  InterfaceClick listener;
+    private NowPlayingFragment nowPlayingFragment;
+
     public SongsFragment() {
         // Required empty public constructor
     }
@@ -43,19 +45,11 @@ public class SongsFragment extends Fragment implements Contract.View{
         View view = inflater.inflate(R.layout.fragment_songs, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-       // presenter = new Presenter();
 
         presenter = new Presenter(this);
         presenter.getAllAudio();
         System.out.println("listerner---------------------------"+listener);
 
-//        ArrayList<MusicFiles> musicFiles = null;
-//        if(!(musicFiles.size()<1)){
-//            musicAdapter = new MusicAdapter(getContext(),musicFiles,listener);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
-//            recyclerView.setAdapter(musicAdapter);
-//        }
-//        return view;
         return view;
     }
 
@@ -69,4 +63,6 @@ public class SongsFragment extends Fragment implements Contract.View{
         recyclerView.setAdapter(musicAdapter);
 
     }
+
+
 }
