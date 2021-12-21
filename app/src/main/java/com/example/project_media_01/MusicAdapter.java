@@ -75,12 +75,10 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             public void onClick(View v) {
                 System.out.println("list onclick worked "+allAudio.get(position));
                 System.out.println("position--------------- "+position);
-                System.out.println("listerner  "+ listener);
                 System.out.println("presenter---------------"+ presenter);
                 presenter.playSong(position);
                 presenter.getSongDetails(position);
                 //viewPager.setCurrentItem(0);
-                //listener.clickFunction(position);
             }
         });
 

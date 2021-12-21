@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="song name: "
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/album"
@@ -44,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="album :"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/artist"
@@ -52,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="artist:"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
 
         </LinearLayout>

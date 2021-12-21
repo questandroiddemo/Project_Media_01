@@ -53,7 +53,7 @@ public class Presenter implements Contract.Presenter {
     public void getSongDetails(int position) {
         index =position;
         nowPlayingView= new NowPlayingFragment();
-      System.out.println("getSongDetails()  called in presenter-----------------");
+        System.out.println("getSongDetails()  called in presenter-----------------");
         List<String> songDetails;
         songDetails=model.getSongDetails(position);
         System.out.println("inside get song details now playing object value "+nowPlayingView);
@@ -66,6 +66,8 @@ public class Presenter implements Contract.Presenter {
     public void NextClick() {
         nowPlayingView= new NowPlayingFragment();
         System.out.println("playNextClick()  called in presenter-----------------");
+
+        List<String> songDetails;
         index++;
 //        if(index>=songListSize)
 //        {
@@ -73,27 +75,24 @@ public class Presenter implements Contract.Presenter {
 //            index=1;
 //        }
             model.playSong(index);
-            List<String> songDetails;
             songDetails = model.getSongDetails(index);
             System.out.println("inside get song details now playing object value " + nowPlayingView);
             nowPlayingView.setSongDetails(songDetails);
-
-
     }
 
     @Override
     public void PreviousClick() {
         System.out.println("playPrevious()  called in presenter-----------------");
+
+        List<String> songDetails;
         index--;
 //        if(index<=0) {
 //            System.out.println("reached at first song");
 //            index=songListSize;
 //        }
             model.playSong(index);
-            List<String> songDetails;
             songDetails = model.getSongDetails(index);
             System.out.println("inside get song details now playing object value " + nowPlayingView);
             nowPlayingView.setSongDetails(songDetails);
-
     }
 }

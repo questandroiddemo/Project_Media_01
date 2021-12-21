@@ -43,8 +43,8 @@ public class MainFragment extends Fragment  {
         tabLayout= (TabLayout) v.findViewById(R.id.tabLayout);
 
         ViewPagerAdapter viewPagerAdapter= new ViewPagerAdapter(getActivity().getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPagerAdapter.addFragments(new NowPlayingFragment(),"Now playing");
         viewPagerAdapter.addFragments(new SongsFragment(),"Song List");
+        viewPagerAdapter.addFragments(new NowPlayingFragment(),"Now playing");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

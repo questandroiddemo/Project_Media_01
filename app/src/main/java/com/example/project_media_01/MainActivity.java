@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import AidlPackage.AidlInterface;
 
-public class MainActivity extends AppCompatActivity implements InterfaceClick{
+public class MainActivity extends AppCompatActivity{
     Presenter presenter;
     public static final int REQUEST_CODE = 1;
     SongsFragment songFrag;
@@ -34,14 +34,6 @@ public class MainActivity extends AppCompatActivity implements InterfaceClick{
                     .setReorderingAllowed(true)
                     .commit();
         }
-
-    }
-
-    @Override
-    public void clickFunction(int position) {
-        System.out.println("reached at clickFunction");
-        System.out.println("presenter "+presenter);
-        presenter.playSong(position);
 
     }
 
