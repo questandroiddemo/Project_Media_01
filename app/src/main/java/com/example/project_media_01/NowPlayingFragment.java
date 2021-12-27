@@ -8,6 +8,9 @@
 
 package com.example.project_media_01;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import java.util.List;
 
 public class NowPlayingFragment extends Fragment implements Contract.NowPlayingView {
     Presenter presenter;
+    private Context mContext;
 
    static TextView title1,album1,artist1;
    static ImageView imageView;
@@ -34,6 +38,9 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
    static SeekBar songSeekBar;
     View v;
     boolean playStatus;
+    Thread updateSeekBar;
+    int totalDuration=0;
+    int cPosition=0;
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -57,7 +64,6 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         btn_previous=v.findViewById(R.id.btn_previous);
         songSeekBar=v.findViewById(R.id.songSeekBar);
         presenter = new Presenter();
-
         //Button click events
 
         //on play/pause button click
@@ -76,6 +82,8 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
 
             }
         });
+
+        // Next Button click
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,6 +91,8 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
 
             }
         });
+
+        // Previous Button click
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +101,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         });
         return v;
     }
+
     @Override
     public void setSongDetails(List<String> songDetails) {
         System.out.println("call reached to setSongDetails in nowPlaying");
@@ -98,8 +109,28 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         title1.setText("Song name   :   "+songDetails.get(0));
         album1.setText("album   :   "+songDetails.get(1));
         artist1.setText("Artist   :   "+songDetails.get(2));
+        if(songDetails.size()==4){
+        String uri = songDetails.get(5);
+        byte[] img = uri.getBytes();
+        if(img!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+            imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false));
+        }
+        }
+
         btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_pause_24);
         playStatus = true;
+    }
+
+    @Override
+    public void setProgress(int currentPosition) {
+
+        songSeekBar.setProgress(currentPosition);
+    }
+
+    @Override
+    public void setMax(int totalDuration) {
+        songSeekBar.setMax(totalDuration);
     }
 
 }

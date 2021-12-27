@@ -20,7 +20,8 @@
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:padding="40dp"
-            app:srcCompat="@drawable/cover" />
+            app:srcCompat="@drawable/cover"
+            />
 
         <LinearLayout
             android:id="@+id/title1"

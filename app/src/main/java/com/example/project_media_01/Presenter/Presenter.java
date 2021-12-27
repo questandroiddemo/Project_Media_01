@@ -16,6 +16,9 @@ public class Presenter implements Contract.Presenter {
     Presenter presenter;
     int index=0;
     int songListSize;
+    Thread updateSeekBar;
+    int totalDuration;
+    int currentPosition;
 
     public Presenter(Contract.View view) {
         this.view = view;
@@ -52,6 +55,7 @@ public class Presenter implements Contract.Presenter {
     @Override
     public void getSongDetails(int position) {
         index =position;
+        System.out.println("clicked list item index : "+index);
         nowPlayingView= new NowPlayingFragment();
         System.out.println("getSongDetails()  called in presenter-----------------");
         List<String> songDetails;
@@ -59,21 +63,32 @@ public class Presenter implements Contract.Presenter {
         System.out.println("inside get song details now playing object value "+nowPlayingView);
         nowPlayingView.setSongDetails(songDetails);
         songListSize = Integer.parseInt(songDetails.get(3));
-        System.out.println("song list size  "+songListSize);
+        System.out.println("song list size in get song list  "+songListSize);
+
+        totalDuration = Integer.parseInt(songDetails.get(4));
+        updateSeekBarMethod();
+
+    }
+
+    @Override
+    public int getcPosition() {
+        int cPosition =  model.getcPosition();
+        return cPosition;
     }
 
     @Override
     public void NextClick() {
         nowPlayingView= new NowPlayingFragment();
         System.out.println("playNextClick()  called in presenter-----------------");
-
         List<String> songDetails;
         index++;
-//        if(index>=songListSize)
-//        {
-//            System.out.println("end of the list");
-//            index=1;
-//        }
+        System.out.println("song list size inside next click  "+songListSize);
+
+        if(index>5){
+            System.out.println("end of the list");
+            System.out.println("index : " + index);
+            index = 0;
+        }
             model.playSong(index);
             songDetails = model.getSongDetails(index);
             System.out.println("inside get song details now playing object value " + nowPlayingView);
@@ -82,17 +97,57 @@ public class Presenter implements Contract.Presenter {
 
     @Override
     public void PreviousClick() {
+        nowPlayingView= new NowPlayingFragment();
         System.out.println("playPrevious()  called in presenter-----------------");
 
         List<String> songDetails;
         index--;
-//        if(index<=0) {
-//            System.out.println("reached at first song");
-//            index=songListSize;
-//        }
+        if(index<0) {
+            System.out.println("reached at first song");
+            index=4;
+        }
             model.playSong(index);
             songDetails = model.getSongDetails(index);
             System.out.println("inside get song details now playing object value " + nowPlayingView);
             nowPlayingView.setSongDetails(songDetails);
     }
+
+
+
+    private void updateSeekBarMethod() {
+
+        //if(currentPosition==0)
+           // updateSeekBar.start();
+
+        updateSeekBar =  new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                System.out.println("Thread run method called.........");
+                // int totalDuration = mediaPlayer.getDuration();
+                while (totalDuration > currentPosition) {
+                    try {
+                        sleep(100);
+                        //currentPosition = mediaPlayer.getCurrentPosition();
+                        //cPosition = iMyAidlInterface.getcPosition();
+                        currentPosition = presenter.getcPosition();
+                        nowPlayingView.setProgress(currentPosition);
+                        nowPlayingView.setMax(totalDuration);
+                        //songSeekBar.setProgress(currentPosition);
+                        //songSeekBar.setMax(totalDuration);
+
+                        System.out.println("cPosition value is ........."+currentPosition);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+
+
+
+
 }

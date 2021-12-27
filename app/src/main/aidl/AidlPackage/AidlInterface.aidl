@@ -12,5 +12,6 @@ interface AidlInterface {
     String getArtist(int position);
 
     List<String> getSongDetails(int position);
+    int getcPosition();
 
 }

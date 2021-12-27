@@ -10,6 +10,8 @@ public interface Contract {
     }
     interface NowPlayingView{
         void setSongDetails(List<String> songDetails);
+        void setProgress(int currentPosition);
+        void setMax(int totalDuration);
     }
 
     interface Presenter{
@@ -19,6 +21,7 @@ public interface Contract {
         void NextClick();
         void PreviousClick();
         void getSongDetails(int position);
+        int getcPosition();
         //void setSongDetails(List<String> songDetails);
 //        ArrayList<MusicFiles> getSongsFromService();
 //        void PreviousButtonClick();
@@ -32,6 +35,7 @@ public interface Contract {
         void playSong(int position);
         boolean playPauseSong();
         List<String> getSongDetails(int position);
+        int getcPosition();
 
     }
 }
