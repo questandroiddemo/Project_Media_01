@@ -1,6 +1,14 @@
+/**
+ * @file    Presenter.java
+ *
+ * @brief   presenter class
+ *
+ * @author  Mayukh P V
+ */
 package com.example.project_media_01.Presenter;
 
 import com.example.project_media_01.ContractInterface.Contract;
+import com.example.project_media_01.MainFragment;
 import com.example.project_media_01.Model.Model;
 import com.example.project_media_01.NowPlayingFragment;
 
@@ -11,6 +19,7 @@ public class Presenter implements Contract.Presenter {
     Contract.View view;
     Contract.NowPlayingView nowPlayingView;
     Presenter presenter;
+    MainFragment mainFragment;
     int index=0;
     int songListSize;
     Thread updateSeekBar= new Thread();
@@ -99,7 +108,6 @@ public class Presenter implements Contract.Presenter {
         int cPosition =  model.getcPosition();
         return cPosition;
     }
-
 
     @Override
     public void NextClick() {

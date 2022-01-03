@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ public class MainFragment extends Fragment  {
     Boolean connected = false;
     Contract.Model model;
     Contract.View view;
-    private  InterfaceClick listener;
 
     View v;
 
@@ -76,22 +74,6 @@ public class MainFragment extends Fragment  {
         }
     };
 
-    public static void playSong(int position) {
-        try {
-            MainFragment.getAidl().playSong(position);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-    public static boolean playPauseSong() {
-        boolean playStatus = false;
-        try {
-            playStatus=MainFragment.getAidl().playPauseSong();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return playStatus;
-    }
     public static AidlInterface getAidl(){
         return aidlInterface;
     }

@@ -3,7 +3,7 @@
  *
  * @brief   Adapter class for song list
  *
- * @author  Riyas VK
+ * @author  Mayukh P V
  */
 
 package com.example.project_media_01;
@@ -62,7 +62,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
                 //viewPager.setCurrentItem(0);
             }
         });
-
     }
 
     @Override

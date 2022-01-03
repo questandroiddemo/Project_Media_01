@@ -32,14 +32,14 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
     Presenter presenter;
     private Context mContext;
 
-   static TextView title1,album1,artist1;
+   static TextView title1,album1,artist1,totalDuration;
    static ImageView imageView;
    static ImageButton btn_play_pause,btn_previous,btn_next;
    static SeekBar songSeekBar;
     View v;
     boolean playStatus;
     Thread updateSeekBar;
-    int totalDuration=0;
+    //int totalDuration=0;
     int cPosition=0;
 
     public NowPlayingFragment() {
@@ -58,6 +58,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         title1=v.findViewById(R.id.text);
         album1=v.findViewById(R.id.album);
         artist1=v.findViewById(R.id.artist);
+        totalDuration=v.findViewById(R.id.totalDuration);
         imageView=v.findViewById(R.id.imageView);
         btn_play_pause=v.findViewById(R.id.btn_play_pause);
         btn_next=v.findViewById(R.id.btn_next);
@@ -109,6 +110,9 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         title1.setText("Song name   :   "+songDetails.get(0));
         album1.setText("album   :   "+songDetails.get(1));
         artist1.setText("Artist   :   "+songDetails.get(2));
+        String duration = convert(songDetails.get(4));//to convert total duration into minutes and seconds
+        totalDuration.setText(duration);
+
         if(songDetails.size()==4){
         String uri = songDetails.get(5);
         byte[] img = uri.getBytes();
@@ -120,6 +124,34 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
 
         btn_play_pause.setBackgroundResource(R.drawable.ic_baseline_pause_24);
         playStatus = true;
+    }
+
+    private String convert(String time) {
+        int milliseconds= Integer.parseInt(time);
+        String finalTimerString = "";
+        String secondsString = "";
+
+        // Convert total duration into time
+        int hours = (int) (milliseconds / (1000 * 60 * 60));
+        int minutes = (int) (milliseconds % (1000 * 60 * 60)) / (1000 * 60);
+        int seconds = (int) ((milliseconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
+
+        // Add hours if there
+        if (hours > 0) {
+            finalTimerString = hours + ":";
+        }
+
+        // Prepending 0 to seconds if it is one digit
+        if (seconds < 10) {
+            secondsString = "0" + seconds;
+        } else {
+            secondsString = "" + seconds;
+        }
+
+        finalTimerString = finalTimerString + minutes + ":" + secondsString;
+
+        // return timer string
+        return finalTimerString;
     }
 
     @Override
