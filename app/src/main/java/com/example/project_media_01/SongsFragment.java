@@ -32,7 +32,6 @@ public class SongsFragment extends Fragment implements Contract.View{
     RecyclerView recyclerView;
     MusicAdapter musicAdapter;
     Button btn ;
-    private  InterfaceClick listener;
     private NowPlayingFragment nowPlayingFragment;
 
     public SongsFragment() {
@@ -45,20 +44,15 @@ public class SongsFragment extends Fragment implements Contract.View{
         View view = inflater.inflate(R.layout.fragment_songs, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
         presenter = new Presenter(this);
         presenter.getAllAudio();
-        System.out.println("listerner---------------------------"+listener);
-
         return view;
     }
 
     @Override
     public void setSongList(List<String> allAudio) {
         System.out.println("inside setSingLit"+allAudio);
-        //musicAdapter = new MusicAdapter(getContext(),allAudio,listener);
-        musicAdapter = new MusicAdapter(getContext(),allAudio,listener);
-        System.out.println("Listerner------------------"+listener);
+        musicAdapter = new MusicAdapter(getContext(),allAudio);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(musicAdapter);
 

@@ -22,6 +22,7 @@ public interface Contract {
         void PreviousClick();
         void getSongDetails(int position);
         int getcPosition();
+
         //void setSongDetails(List<String> songDetails);
 //        ArrayList<MusicFiles> getSongsFromService();
 //        void PreviousButtonClick();

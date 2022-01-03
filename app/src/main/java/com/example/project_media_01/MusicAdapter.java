@@ -22,25 +22,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project_media_01.ContractInterface.Contract;
 import com.example.project_media_01.Presenter.Presenter;
 
-import java.time.Instant;
 import java.util.List;
 
 
 public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder>  {
     Contract.Presenter presenter;
     private Context mContext;
-    //private ArrayList<MusicFiles> mFiles;
     private List<String> allAudio;
-    private InterfaceClick listener;
-    private Instant Glide;
 
 
-    MusicAdapter(Context mContext, List<String> allAudio,InterfaceClick send){
-        //this.presenter = presenter;
+    MusicAdapter(Context mContext, List<String> allAudio){
         this.mContext = mContext;
         this.allAudio=allAudio;
-        this.listener= send;
-        System.out.println("-------------------"+listener);
     }
     @NonNull
     @Override
@@ -53,22 +46,10 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-       // MusicFiles model = mFiles.get(position);
 
-        //holder.file_name.setText(model.getTitle());
-        //holder.file_name.setText(mFiles.get(position).getTitle());
         holder.file_name.setText(allAudio.get(position));
         presenter = new Presenter();
         System.out.println("presenter----------------"+presenter);
-
-//to diaplay album cover
-//        byte[] image = getAlbumArt(mFiles.get(position).getPath());
-//        if(image != null){
-//            Glide.with(mContext).asBitmap().load(image).into(holder.album_art);
-//        }
-//        else {
-//            Glide.with(mContext).asBitmap().load(R.drawable.ic_launcher_foreground).into(holder.album_art);
-//        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
