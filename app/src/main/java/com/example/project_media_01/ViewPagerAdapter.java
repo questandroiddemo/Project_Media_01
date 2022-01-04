@@ -1,3 +1,10 @@
+/**
+ * @file    ViewPagerAdapter.java
+ *
+ * @brief   for fragment
+ *
+ * @author  Riyas VK
+ */
 package com.example.project_media_01;
 
 import androidx.annotation.NonNull;

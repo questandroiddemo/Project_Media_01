@@ -22,7 +22,7 @@ public class Presenter implements Contract.Presenter {
     MainFragment mainFragment;
     int index=0;
     int songListSize;
-    Thread updateSeekBar= new Thread();
+    Thread updateSeekBar = new Thread();
     int totalDuration;
     int currentPosition;
 
@@ -34,13 +34,12 @@ public class Presenter implements Contract.Presenter {
 
     }
 
-
     @Override
     public void getAllAudio(){
         //System.out.println("getAllAudio in presenter call output "+model.getAllAudio());
         List<String> songsList;
         songsList = model.getAllAudio();
-        view.setSongList(songsList);
+        view.setSongList(songsList); // To set song list in Song List Fragment
     }
 
     @Override
@@ -60,46 +59,47 @@ public class Presenter implements Contract.Presenter {
         index =position;
         nowPlayingView= new NowPlayingFragment();
         List<String> songDetails;
-
         //get details of current song
         songDetails=model.getSongDetails(position);
 
         //to set song details and seekbar timer on nowPlaying view
         nowPlayingView.setSongDetails(songDetails);
-        updateSeekBarMethod();
+        updateSeekBarMethod(songDetails);
+        updateSeekBar.start();
 
     }
 
-    private void updateSeekBarMethod() {
+    private void updateSeekBarMethod(List<String> songDetails) {
         System.out.println(" updateSeekBarMethod method called.........");
-
-        updateSeekBar.start();
+        totalDuration = Integer.parseInt(songDetails.get(4));
+        //updateSeekBar.start();
         updateSeekBar =  new Thread() {
             @Override
             public void run() {
                 super.run();
                 System.out.println("Thread run method called.........");
+                System.out.println("total duration : "+totalDuration);
+                System.out.println("current position : "+currentPosition);
+
+
                 // int totalDuration = mediaPlayer.getDuration();
                 while (totalDuration > currentPosition) {
                     try {
                         sleep(100);
-                        //currentPosition = mediaPlayer.getCurrentPosition();
-                        //cPosition = iMyAidlInterface.getcPosition();
                         currentPosition = model.getcPosition();
-                        System.out.println("cposition in presenter : "+currentPosition);
+                        System.out.println("cposition in thread : "+currentPosition);
                         nowPlayingView.setProgress(currentPosition);
                         nowPlayingView.setMax(totalDuration);
-                        //songSeekBar.setProgress(currentPosition);
-                        //songSeekBar.setMax(totalDuration);
-
-                        System.out.println("cPosition value is ........."+currentPosition);
                     }
                     catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+
             }
         };
+
+
     }
 
 
@@ -116,7 +116,6 @@ public class Presenter implements Contract.Presenter {
         List<String> songDetails;
         songDetails = model.getSongDetails(1);
         songListSize= Integer.parseInt(songDetails.get(3));// to get count of mp3 files
-
 
         if(index>=songListSize){
             System.out.println("end of the list");
@@ -151,41 +150,7 @@ public class Presenter implements Contract.Presenter {
             nowPlayingView.setSongDetails(songDetails);
     }
 
-
-//    private void updateSeekBarMethod() {
-//        System.out.println(" updateSeekBarMethod method called.........");
-//
-//        //if(currentPosition==0)
-//        updateSeekBar.start();
-//
-//        updateSeekBar =  new Thread() {
-//            @Override
-//            public void run() {
-//                super.run();
-//                System.out.println("Thread run method called.........");
-//                // int totalDuration = mediaPlayer.getDuration();
-//                while (totalDuration > currentPosition) {
-//                    try {
-//                        sleep(100);
-//                        //currentPosition = mediaPlayer.getCurrentPosition();
-//                        //cPosition = iMyAidlInterface.getcPosition();
-//                        currentPosition = model.getcPosition();
-//                        System.out.println("cposition in presenter : "+currentPosition);
-//                        nowPlayingView.setProgress(currentPosition);
-//                        nowPlayingView.setMax(totalDuration);
-//                        //songSeekBar.setProgress(currentPosition);
-//                        //songSeekBar.setMax(totalDuration);
-//
-//                        System.out.println("cPosition value is ........."+currentPosition);
-//                    }
-//                    catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        };
-//    }
-
-
-
+    public void seekToCall(int progress) {
+        model.seekToCall(progress);//change media player current position on seek bar change
+    }
 }

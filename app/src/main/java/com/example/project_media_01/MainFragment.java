@@ -1,3 +1,11 @@
+/**
+ * @file    MainFragment.java
+ *
+ * @brief   AIDL connection established here
+ *
+ * @author  Mayukh P V
+ */
+
 package com.example.project_media_01;
 
 import android.content.ComponentName;
@@ -15,7 +23,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.project_media_01.ContractInterface.Contract;
 import com.google.android.material.tabs.TabLayout;
 
 import AidlPackage.AidlInterface;
@@ -25,12 +32,8 @@ public class MainFragment extends Fragment  {
     private ViewPager viewPager;
     static AidlInterface aidlInterface;
     Boolean connected = false;
-    Contract.Model model;
-    Contract.View view;
 
     View v;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +48,8 @@ public class MainFragment extends Fragment  {
         viewPagerAdapter.addFragments(new NowPlayingFragment(),"Now playing");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        //viewPager.setCurrentItem(0); //can determine launching fragment with this line of code
 
         //initViewPager();
 

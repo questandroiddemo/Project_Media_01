@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,8 +30,6 @@ public class SongsFragment extends Fragment implements Contract.View{
     Presenter presenter;
     RecyclerView recyclerView;
     MusicAdapter musicAdapter;
-    Button btn ;
-    private NowPlayingFragment nowPlayingFragment;
 
     public SongsFragment() {
         // Required empty public constructor
@@ -51,11 +48,10 @@ public class SongsFragment extends Fragment implements Contract.View{
 
     @Override
     public void setSongList(List<String> allAudio) {
-        System.out.println("inside setSingLit"+allAudio);
+        System.out.println("inside setSongList"+allAudio);
         musicAdapter = new MusicAdapter(getContext(),allAudio);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(musicAdapter);
-
     }
 
 

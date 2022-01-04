@@ -29,8 +29,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     Contract.Presenter presenter;
     private Context mContext;
     private List<String> allAudio;
-
-
     MusicAdapter(Context mContext, List<String> allAudio){
         this.mContext = mContext;
         this.allAudio=allAudio;
@@ -56,7 +54,6 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
             public void onClick(View v) {
                 System.out.println("list onclick worked "+allAudio.get(position));
                 System.out.println("position--------------- "+position);
-                System.out.println("presenter---------------"+ presenter);
                 presenter.playSong(position);
                 presenter.getSongDetails(position);
                 //viewPager.setCurrentItem(0);

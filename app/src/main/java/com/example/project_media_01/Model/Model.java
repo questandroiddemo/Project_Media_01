@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Model implements Contract.Model{
     MainFragment mainFragment;
-    Contract.View view;
 
     public Model(Contract.Presenter presenter) {
         this.presenter = presenter;
@@ -64,6 +63,16 @@ public class Model implements Contract.Model{
             e.printStackTrace();
         }
         return cPosition;
+    }
+
+    @Override
+    public void seekToCall(int progress) {
+        try {
+            MainFragment.getAidl().seekToCall(progress);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
