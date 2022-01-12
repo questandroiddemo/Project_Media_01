@@ -8,7 +8,6 @@
 
 package com.example.project_media_01;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,15 +27,14 @@ import java.util.List;
 
 public class NowPlayingFragment extends Fragment implements Contract.NowPlayingView {
     Presenter presenter;
-    private Context mContext;
 
    static TextView title1,album1,artist1,totalDuration,playerPosition;
    static ImageView imageView;
    static ImageButton btn_play_pause,btn_previous,btn_next;
    static SeekBar songSeekBar;
+   String seekPosition;
     View v;
     boolean playStatus;
-    int cPosition=0;
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -62,6 +60,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         btn_previous=v.findViewById(R.id.btn_previous);
         songSeekBar=v.findViewById(R.id.songSeekBar);
         presenter = new Presenter();
+
         //Button click events
 
         //on play/pause button click
@@ -101,20 +100,17 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         songSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //
                 System.out.println("progress value"+progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                //
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 System.out.println("onStopTrackingTouch "+seekBar.getProgress());
                 presenter.seekToCall(seekBar.getProgress());
-                //mediaPlayer.seekTo(seekBar.getProgress());
             }
         });
 
@@ -148,6 +144,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
         playStatus = true;
     }
 
+    // to convert millisecond to hour:minutes:second format
     private String convert(String time) {
         int milliseconds= Integer.parseInt(time);
         String finalTimerString = "";
@@ -172,7 +169,7 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
 
         finalTimerString = finalTimerString + minutes + ":" + secondsString;
 
-        // return timer string
+        // return timer string in hour:minutes:seconds format
         return finalTimerString;
     }
 
@@ -180,12 +177,15 @@ public class NowPlayingFragment extends Fragment implements Contract.NowPlayingV
     public void setProgress(int currentPosition) {
         songSeekBar.setProgress(currentPosition);
         //playerPosition.setText(String.valueOf(currentPosition));
+
     }
+
 
     @Override
     public void setMax(int totalDuration) {
         songSeekBar.setMax(totalDuration);
     }
+
 
 
 }

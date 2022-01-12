@@ -8,7 +8,7 @@ import com.example.project_media_01.MainFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model implements Contract.Model{
+public class Model implements Contract.Model {
     MainFragment mainFragment;
 
     public Model(Contract.Presenter presenter) {

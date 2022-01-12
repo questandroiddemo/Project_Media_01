@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#2196F3"
+    android:background="#C5C5C5"
     android:layout_marginTop="5dp"
     android:id="@+id/audio_item">
 
@@ -21,6 +21,7 @@
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/music_img"
         android:text="File Name"
-        android:textColor="@color/white" />
+        android:textColor="@color/black"
+        android:textSize="22sp" />
 
 </RelativeLayout>

@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SongsFragment extends Fragment implements Contract.View{
+public class SongsFragment extends Fragment implements Contract.SongListView {
     Presenter presenter;
     RecyclerView recyclerView;
     MusicAdapter musicAdapter;

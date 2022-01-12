@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="5dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:padding="40dp"
             app:srcCompat="@drawable/cover"
             />
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="5dp"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         android:foregroundGravity="center"
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/playerPosition"

@@ -8,7 +8,6 @@
 package com.example.project_media_01.Presenter;
 
 import com.example.project_media_01.ContractInterface.Contract;
-import com.example.project_media_01.MainFragment;
 import com.example.project_media_01.Model.Model;
 import com.example.project_media_01.NowPlayingFragment;
 
@@ -16,17 +15,16 @@ import java.util.List;
 
 public class Presenter implements Contract.Presenter {
     Model model= new Model();
-    Contract.View view;
+    Contract.SongListView view;
     Contract.NowPlayingView nowPlayingView;
     Presenter presenter;
-    MainFragment mainFragment;
     int index=0;
     int songListSize;
     Thread updateSeekBar = new Thread();
     int totalDuration;
     int currentPosition;
 
-    public Presenter(Contract.View view) {
+    public Presenter(Contract.SongListView view) {
         this.view = view;
         model=new Model(presenter);
     }
@@ -72,6 +70,8 @@ public class Presenter implements Contract.Presenter {
     private void updateSeekBarMethod(List<String> songDetails) {
         System.out.println(" updateSeekBarMethod method called.........");
         totalDuration = Integer.parseInt(songDetails.get(4));
+        nowPlayingView.setMax(totalDuration); //to set total duration of the song on seek bar
+
         //updateSeekBar.start();
         updateSeekBar =  new Thread() {
             @Override
@@ -81,15 +81,14 @@ public class Presenter implements Contract.Presenter {
                 System.out.println("total duration : "+totalDuration);
                 System.out.println("current position : "+currentPosition);
 
-
-                // int totalDuration = mediaPlayer.getDuration();
                 while (totalDuration > currentPosition) {
                     try {
                         sleep(100);
                         currentPosition = model.getcPosition();
                         System.out.println("cposition in thread : "+currentPosition);
                         nowPlayingView.setProgress(currentPosition);
-                        nowPlayingView.setMax(totalDuration);
+
+
                     }
                     catch (InterruptedException e) {
                         e.printStackTrace();

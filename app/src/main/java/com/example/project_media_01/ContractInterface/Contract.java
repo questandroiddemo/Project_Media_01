@@ -13,7 +13,7 @@ import java.util.List;
 public interface Contract {
 
     //for songListFragment
-    interface View{
+    interface SongListView {
         //updateEditText(String title,String album,String artist , String path);
         void setSongList(List<String> allAudio);
         //void setSongDetails(List<String> songDetails);
@@ -37,7 +37,7 @@ public interface Contract {
         //updateSeekBar();
     }
 
-    interface Model{
+    interface Model {
         List<String> getAllAudio();
         void playSong(int position);
         boolean playPauseSong();

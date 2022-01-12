@@ -1,7 +1,7 @@
 /**
  * @file    MainFragment.java
  *
- * @brief   AIDL connection established here
+ * @brief   AIDL connection established here , viewpager for nowPlaying and songList fragment
  *
  * @author  Mayukh P V
  */
