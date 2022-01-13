@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
 
-    tools:context=".NowPlayingFragment"
+    tools:context=".View.NowPlayingFragment"
     tools:ignore="LabelFor">
     <LinearLayout
         android:layout_width="match_parent"
